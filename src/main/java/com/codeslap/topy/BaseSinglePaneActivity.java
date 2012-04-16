@@ -18,6 +18,7 @@ package com.codeslap.topy;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 import android.widget.FrameLayout;
 
 /**
@@ -33,9 +34,21 @@ public abstract class BaseSinglePaneActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout frameLayout = new FrameLayout(this);
-        frameLayout.setId(ID);
-        setContentView(frameLayout);
+        View rootView = getRootView();
+        if ((getRootResource() != Integer.MIN_VALUE || rootView != null) && getRootResourceId() == ID) {
+            throw new IllegalStateException("When overriding root view, you must also override getRootResourceId()" +
+                    " passing the ID of the view group where the content returned view onCreatePane will" +
+                    " be placed.");
+        }
+        if (getRootResource() != Integer.MIN_VALUE) {
+            setContentView(getRootResource());
+        } else if (rootView != null) {
+            setContentView(rootView);
+        } else {
+            FrameLayout frameLayout = new FrameLayout(this);
+            frameLayout.setId(getRootResourceId());
+            setContentView(frameLayout);
+        }
         setSupportProgressBarIndeterminateVisibility(false);
 
         if (savedInstanceState == null) {
@@ -44,9 +57,21 @@ public abstract class BaseSinglePaneActivity extends BaseActivity {
 
             String tag = fragment.getClass().getName();
             getSupportFragmentManager().beginTransaction()
-                    .add(ID, fragment, tag)
+                    .add(getRootResourceId(), fragment, tag)
                     .commit();
         }
+    }
+
+    protected int getRootResource() {
+        return Integer.MIN_VALUE;
+    }
+
+    protected int getRootResourceId() {
+        return ID;
+    }
+
+    protected View getRootView() {
+        return null;
     }
 
     /**

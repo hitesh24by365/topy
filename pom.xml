@@ -41,21 +41,19 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <android.version>4.0.1.2</android.version>
-        <sherlock.version>4.0.1</sherlock.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
-            <version>${android.version}</version>
+            <version>4.0.1.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.actionbarsherlock</groupId>
             <artifactId>library</artifactId>
-            <version>${sherlock.version}</version>
+            <version>4.0.1</version>
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
