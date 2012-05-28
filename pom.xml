@@ -9,7 +9,7 @@
 
     <groupId>com.codeslap</groupId>
     <artifactId>topy</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
     <name>Topy</name>
     <description>Some boilerplate code when using fragments API</description>
